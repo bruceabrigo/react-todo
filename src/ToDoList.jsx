@@ -4,8 +4,7 @@ import React, { useState} from "react"
 const ToDoList = () => {
 
     // define a tasks state variable
-    // which will be an empty array named tasks
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState(["Study for Accenture...", "Get Ready for Accenture...", "See my GF Madi at Work!"]);
     // create a new state variable to set a new task
     // initial state will be an empty string
     // setNewTask will add a string variable to the tasks array
@@ -14,7 +13,8 @@ const ToDoList = () => {
     // define a function to handle inputs
     // it will take an event handler
     const handleInputChange = (event) => {
-
+        // handle input should access enter event and target value
+        setNewTask(event.target.value);
     }
     // function to add a new task
     const addTask = () => {
@@ -48,7 +48,45 @@ const ToDoList = () => {
                     // call handleInputChange function
                     onChange={handleInputChange}
                 />
+                {/* button element will handle the input change */}
+                <button 
+                    className="add-button"
+                    onClick={addTask}
+                    >
+                    Add
+                </button>
             </div>
+            {/* show an ordered list to display tasks */}
+            <ol>
+                {/* use js map method to seek through tasks array */}
+                {tasks.map((task, index) => {
+                    return (
+                        // ensuring adding index as key will alow react to remove the proper task at its current index in the array
+                        // this prevents removing all tasks or the wrong task
+                    <li key={index}>
+                        <span className="text">{task}</span>
+                        <button
+                            className="delete-button"
+                            onClick={() => deleteTask(index)}
+                        >
+                            Delete
+                        </button>
+                        <button
+                            className="move-button"
+                            onClick={() => moveTaskUp(index)}
+                        >
+                            Up
+                        </button>
+                        <button
+                            className="move-button"
+                            onClick={() => moveTaskUp(index)}
+                        >
+                            Down
+                        </button>
+                    </li>
+                    )
+                })}
+            </ol>
         </div>
     )
 }
