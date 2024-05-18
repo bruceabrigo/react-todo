@@ -4,7 +4,9 @@ import React, { useState} from "react"
 const ToDoList = () => {
 
     // define a tasks state variable
-    const [tasks, setTasks] = useState(["Study for Accenture...", "Get Ready for Accenture...", "See my GF Madi at Work!"]);
+    // default state of tasks will be in empty array
+    // setTasks is to be called on add-button event 
+    const [tasks, setTask] = useState([""]);
     // create a new state variable to set a new task
     // initial state will be an empty string
     // setNewTask will add a string variable to the tasks array
@@ -18,10 +20,17 @@ const ToDoList = () => {
     }
     // function to add a new task
     const addTask = () => {
-
+        // check if input is empty
+        // if the input does not have an empty string then call setTasks and add to the array
+        // adding trim will ensure any white space before or after the string characters are not added to the updated state of newTask
+        if (newTask.trim() !== '') {
+            setTask(t => [...t, newTask]);
+            setNewTask()
+        }
     }
     // function to delete an existing task
     const deleteTask = () => {
+        
 
     }
     // create functions to allow client to move tasks up and down
@@ -79,7 +88,7 @@ const ToDoList = () => {
                         </button>
                         <button
                             className="move-button"
-                            onClick={() => moveTaskUp(index)}
+                            onClick={() => moveTaskDown(index)}
                         >
                             Down
                         </button>
