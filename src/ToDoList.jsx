@@ -29,8 +29,10 @@ const ToDoList = () => {
         }
     }
     // function to delete an existing task
-    const deleteTask = () => {
-        
+    // function should also take index as a parameter to ensure the proper index is selected
+    const deleteTask = (index) => {
+        const updatedTasks = tasks.filter((e, i) => i !== index)
+        setTask(updatedTasks)
 
     }
     // create functions to allow client to move tasks up and down
